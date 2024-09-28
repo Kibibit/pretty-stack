@@ -65,7 +65,7 @@ function getPattern(line) {
  * @function prettyStack
  * @param {!Error} error
  * @param {boolean} [printFile=true]
- * @returns {void}
+ * @returns string
  */
 function prettyStack(error, printFile = true) {
     const messageStack = [];
@@ -129,9 +129,9 @@ function prettyStack(error, printFile = true) {
             // Ignore
         }
         messageStack.push("");
-
-        return messageStack;
     }
+
+    return messageStack.join("\n");
 }
 
 module.exports = prettyStack;

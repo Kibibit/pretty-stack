@@ -1,5 +1,5 @@
 {
-    "name": "@slimio/pretty-stack",
+    "name": "@kibibit/pretty-stack",
     "version": "0.4.2",
     "description": "Pretty Stack Trace to stdout in TTY",
     "main": "index.js",
@@ -13,7 +13,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/SlimIO/pretty-stack.git"
+        "url": "git+https://github.com/kibibit/pretty-stack.git"
     },
     "keywords": [
         "javascript",
@@ -26,12 +26,12 @@
         "index.d.ts",
         "index.js"
     ],
-    "author": "SlimIO",
+    "author": "thatkookooguy <neilkalman@gmail.com>",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/SlimIO/pretty-stack/issues"
+        "url": "https://github.com/kibibit/pretty-stack/issues"
     },
-    "homepage": "https://github.com/SlimIO/pretty-stack#readme",
+    "homepage": "https://github.com/kibibit/pretty-stack#readme",
     "dependencies": {
         "clean-stack": "^2.2.0",
         "kleur": "^3.0.3"
