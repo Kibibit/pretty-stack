@@ -68,11 +68,12 @@ function getPattern(line) {
  * @returns {void}
  */
 function prettyStack(error, printFile = true) {
+    const messageStack = [];
     const arrStack = transformToArrayStack(error);
     const mem = new Set();
     let firstStack = null;
 
-    console.log("\n " + bgRed(white().bold(` ${arrStack.shift()} `)) + "\n");
+    messageStack.push("\n " + bgRed(white().bold(` ${arrStack.shift()} `)) + "\n");
     // console.log(arrStack);
     for (const line of arrStack) {
         const result = getPattern(line);
@@ -94,15 +95,15 @@ function prettyStack(error, printFile = true) {
 
         const linePosition = `${cyan().bold(fileName)} ${yellow().bold(`at line ${fileLine}`)}`;
         const lineToLog = at === null ? linePosition : `at ${white().bold(at)} (${linePosition})`;
-        console.log(gray().bold(`  o ${lineToLog}`));
+        messageStack.push(gray().bold(`  o ${lineToLog}`));
         if (!mem.has(fullName)) {
-            console.log(gray().bold(`    ${path}\n`));
+            messageStack.push(gray().bold(`    ${path}\n`));
             mem.add(fullName);
         }
     }
 
     if (printFile && firstStack !== null) {
-        console.log("");
+        messageStack.push("");
         const [, at, path = at] = getPattern(firstStack);
         const [fileName, line, char] = basename(path).split(":");
 
@@ -116,10 +117,10 @@ function prettyStack(error, printFile = true) {
                     const color = isTheLine ? white().bold : gray().bold;
                     const arrow = isTheLine ? cyan().bold(">") : " ";
                     const toAdd = len - `${index + 1}`.length;
-                    console.log("  " + gray().bold(`${arrow} ${index + 1}${" ".repeat(toAdd)} |`) + color(`  ${value}`));
+                    messageStack.push("  " + gray().bold(`${arrow} ${index + 1}${" ".repeat(toAdd)} |`) + color(`  ${value}`));
                     if (isTheLine) {
                         const sLen = " ".repeat(len);
-                        console.log("     " + sLen + gray().bold("|  ") + " ".repeat(char - 1) + cyan().bold("^"));
+                        messageStack.push("     " + sLen + gray().bold("|  ") + " ".repeat(char - 1) + cyan().bold("^"));
                     }
                 }
             });
@@ -127,7 +128,9 @@ function prettyStack(error, printFile = true) {
         catch (error) {
             // Ignore
         }
-        console.log("");
+        messageStack.push("");
+
+        return messageStack;
     }
 }
 
